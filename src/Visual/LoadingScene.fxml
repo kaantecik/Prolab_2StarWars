@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="470.0" prefWidth="441.0" style="-fx-background-color: #FFE200;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Visual.LoadingSceneController">
+   <children>
+      <Circle fx:id="CircleOne" fill="#1f93ff00" layoutX="216.0" layoutY="195.0" radius="146.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="10.0" style="-fx-stroke-dash-array: 50;" visible="false" />
+      <Circle fx:id="CircleTwo" fill="#1f93ff00" layoutX="216.0" layoutY="194.0" radius="106.0" stroke="#8be163" strokeType="INSIDE" strokeWidth="10.0" style="-fx-stroke-dash-array: 35;" visible="false" />
+      <Circle fx:id="CircleThree" fill="#1f93ff00" layoutX="216.0" layoutY="195.0" radius="55.0" stroke="#3cc8dd" strokeType="INSIDE" strokeWidth="10.0" style="-fx-stroke-dash-array: 35;" visible="false" />
+      <Label fx:id="LoadingText" layoutX="306.0" layoutY="427.0" opacity="0.09" text="Loading.." visible="false">
+         <font>
+            <Font name="Star Jedi Logo MonoLine" size="22.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="StartButton" layoutX="179.0" layoutY="368.0" onAction="#OpenScene" opacity="0.0" prefHeight="40.0" prefWidth="74.0" style="-fx-background-color: black;" text="Start" textFill="#ffe200" visible="false">
+         <font>
+            <Font name="Star Jedi Logo MonoLine" size="13.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="QuitButton" alignment="TOP_CENTER" contentDisplay="TOP" layoutX="400.0" onAction="#Quit" prefHeight="28.0" prefWidth="41.0" style="-fx-background-color: black;" text="x" textFill="#ffe200">
+         <font>
+            <Font name="Star Jedi Logo MonoLine" size="18.0" />
+         </font>
+      </JFXButton>
+      <ImageView fx:id="KyloImage" fitHeight="111.0" fitWidth="110.0" layoutX="18.0" layoutY="139.0" onMouseEntered="#OpenKyloAttribute" onMouseExited="#CloseKyloAttribute" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../Images/movie_film_star_wars_cinema_-12-512.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="DarthVaderImage" fitHeight="89.0" fitWidth="89.0" layoutX="168.0" layoutY="151.0" onMouseEntered="#OpenDarthAttribute" onMouseExited="#CloseDarthAttribute" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../Images/iconfinder_darth_vader_216968.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="StormtrooperImage" fitHeight="98.0" fitWidth="89.0" layoutX="311.0" layoutY="150.0" onMouseEntered="#OpenStormtrooperAttribute" onMouseExited="#CloseStormtrooperAttribute" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../Images/308190-200.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="Title" layoutX="68.0" layoutY="40.0" prefHeight="60.0" prefWidth="293.0" text="Choose your enemies" visible="false">
+         <font>
+            <Font name="Star Jedi Logo MonoLine" size="23.0" />
+         </font>
+      </Label>
+      <JFXToggleButton fx:id="KyloRenButton" layoutX="-8.0" layoutY="239.0" onAction="#AddKyloRen" prefHeight="60.0" prefWidth="138.0" size="6.0" text="kylo Ren" toggleColor="#ffe200" toggleLineColor="BLACK" unToggleLineColor="BLACK" visible="false">
+         <font>
+            <Font name="Star Jedi Logo MonoLine" size="13.0" />
+         </font>
+      </JFXToggleButton>
+      <JFXToggleButton fx:id="DarthVaderButton" layoutX="117.0" layoutY="239.0" onAction="#AddDarthVader" prefHeight="60.0" prefWidth="160.0" size="6.0" text="Darth vader" toggleColor="#ffe200" toggleLineColor="BLACK" unToggleLineColor="BLACK" visible="false">
+         <font>
+            <Font name="Star Jedi Logo MonoLine" size="13.0" />
+         </font>
+      </JFXToggleButton>
+      <JFXToggleButton fx:id="StormtrooperButton" layoutX="271.0" layoutY="239.0" onAction="#AddStormtrooper" prefHeight="60.0" prefWidth="169.0" size="6.0" text="Stormtrooper" toggleColor="#ffe200" toggleLineColor="BLACK" unToggleLineColor="BLACK" visible="false">
+         <font>
+            <Font name="Star Jedi Logo MonoLine" size="13.0" />
+         </font>
+      </JFXToggleButton>
+      <JFXComboBox fx:id="KyloRenComboBox" disable="true" layoutX="41.0" layoutY="286.0" visible="false" />
+      <JFXComboBox fx:id="DarthVaderComboBox" disable="true" layoutX="184.0" layoutY="286.0" visible="false" />
+      <JFXComboBox fx:id="StormtrooperComboBox" disable="true" layoutX="338.0" layoutY="286.0" visible="false" />
+      <JFXButton fx:id="ContinueButton" layoutX="161.0" layoutY="366.0" onAction="#StartAnimation" text="Continue">
+         <font>
+            <Font name="Star Jedi Logo MonoLine" size="18.0" />
+         </font>
+      </JFXButton>
+      <Pane fx:id="KyloPane" layoutY="93.0" opacity="0.81" prefHeight="40.0" prefWidth="186.0" style="-fx-background-color: black;" visible="false">
+         <children>
+            <Label layoutX="16.0" layoutY="6.0" text="Can walk twice." textFill="#ffe200">
+               <font>
+                  <Font name="Star Jedi Logo MonoLine" size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="DarthPane" layoutX="126.0" layoutY="93.0" opacity="0.81" prefHeight="40.0" prefWidth="190.0" style="-fx-background-color: black;" visible="false">
+         <children>
+            <Label layoutX="11.0" layoutY="6.0" text="Can break walls." textFill="#ffe200">
+               <font>
+                  <Font name="Star Jedi Logo MonoLine" size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="StormtrooperPane" layoutX="243.0" layoutY="88.0" opacity="0.81" prefHeight="40.0" prefWidth="196.0" style="-fx-background-color: black;" visible="false">
+         <children>
+            <Label layoutX="2.0" layoutY="6.0" onMouseEntered="#OpenStormtrooperAttribute" onMouseExited="#CloseStormtrooperAttribute" text="Just stormtrooper." textFill="#ffe200">
+               <font>
+                  <Font name="Star Jedi Logo MonoLine" size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="ControllerPane" layoutX="15.0" layoutY="21.0" prefHeight="283.0" prefWidth="398.0" visible="false">
+         <children>
+            <Label layoutX="14.0" text="controller">
+               <font>
+                  <Font name="Star Jedi Logo MonoLine" size="23.0" />
+               </font>
+            </Label>
+            <ImageView layoutX="270.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+               <image>
+                  <Image url="@../Images/Arrow.png" />
+               </image>
+            </ImageView>
+            <ImageView layoutX="230.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+               <image>
+                  <Image url="@../Images/Arrow.png" />
+               </image>
+            </ImageView>
+            <ImageView layoutX="190.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+               <image>
+                  <Image url="@../Images/Arrow.png" />
+               </image>
+            </ImageView>
+            <ImageView layoutX="150.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/Arrow.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="14.0" layoutY="73.0" text="movement:">
+               <font>
+                  <Font name="Star Jedi Logo MonoLine" size="19.0" />
+               </font>
+            </Label>
+            <Label layoutX="18.0" layoutY="167.0" text="mission:">
+               <font>
+                  <Font name="Star Jedi Logo MonoLine" size="19.0" />
+               </font>
+            </Label>
+            <Label layoutX="132.0" layoutY="167.0" text="reach the cup before &#10;the empire chase &#10;around after you.">
+               <font>
+                  <Font name="Star Jedi Logo MonoLine" size="19.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <JFXButton fx:id="ReadFileButton" layoutX="282.0" layoutY="131.0" onAction="#ReadFile" style="-fx-background-color: black;" text="Read File" textFill="#ffe200">
+         <font>
+            <Font name="Star Jedi Logo MonoLine" size="12.0" />
+         </font>
+      </JFXButton>
+      <JFXComboBox fx:id="EnemyCountBox" layoutX="194.0" layoutY="129.0" prefHeight="25.0" prefWidth="56.0" />
+      <Label fx:id="EnemyCountLabel" layoutX="44.0" layoutY="132.0" text="Enemy Count : ">
+         <font>
+            <Font name="Star Jedi Logo MonoLine" size="13.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
