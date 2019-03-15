@@ -36,12 +36,13 @@ import java.util.*;
 
 /**
  * TO DO LIST
- * -Dosyadan okuma FAILED
+ * -Dosyadan okuma DONE
  * -UI düzenlemeleri/Karakterlerin görselleri DONE
  * -Duvar kontrolü DONE
  * -Düşman kontrolü DONE
  * -classların implement edilmesi DONE
  * -en kısa yol algoritması
+ * -optimizasyon
  */
 
 public class Controller  implements Initializable {
@@ -88,7 +89,6 @@ public class Controller  implements Initializable {
     private Pane GameOverPane;
 
     public static ArrayList<Character> Enemies = new ArrayList<Character>();
-    public static ArrayList<String> Gates = new ArrayList<String>();
     public static LukeSkywalker lukeSkywalker = new LukeSkywalker();
     public static MasterYoda masterYoda = new MasterYoda();
     public static KyloRen kyloRen = new KyloRen();
@@ -133,11 +133,6 @@ public class Controller  implements Initializable {
                 GridPane.setRowIndex(CharacterLuke,GridPane.getRowIndex(CharacterLuke)-1);
                 lukeSkywalker.setPosX(GridPane.getColumnIndex(CharacterLuke));
                 lukeSkywalker.setPosY(GridPane.getRowIndex(CharacterLuke));
-                CharacterLuke.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
-                    if(key.getCode()==KeyCode.UP) {
-                        System.out.println("You pressed enter");
-                    }
-                });
             }
         }
 
