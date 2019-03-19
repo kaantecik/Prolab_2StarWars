@@ -1,11 +1,7 @@
 package Visual;
 
-import Visual.Characters.DarthVader;
-import Visual.Characters.KyloRen;
-import Visual.Characters.Stormtrooper;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXToggleButton;
 import javafx.animation.FadeTransition;
 import javafx.animation.RotateTransition;
 import javafx.animation.TranslateTransition;
@@ -20,24 +16,29 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Scanner;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
 public class LoadingSceneController implements Initializable {
+
+    public enum Difficulty{
+        Easy,
+        Medium,
+        Hard,
+        Expert,
+        Insane
+    }
 
     @FXML private Circle CircleOne;
 
@@ -61,17 +62,11 @@ public class LoadingSceneController implements Initializable {
 
     @FXML private Label Title;
 
-    @FXML private Pane KyloPane;
-
-    @FXML private Pane DarthPane;
-
-    @FXML private Pane StormtrooperPane;
-
     @FXML private Pane ControllerPane;
 
     @FXML private JFXButton ReadFileButton;
 
-    @FXML private JFXComboBox<String> EnemyCountBox;
+    @FXML private JFXComboBox<Difficulty> EnemyCountBox;
 
     @FXML private Label EnemyCountLabel;
 
@@ -129,14 +124,24 @@ public class LoadingSceneController implements Initializable {
 
     @FXML private GridPane EnemyPane;
 
+    ObservableList<Difficulty> difficulty = FXCollections.observableArrayList
+            (Difficulty.Easy,Difficulty.Medium,Difficulty.Hard,Difficulty.Expert,Difficulty.Insane);
 
-    ObservableList<Integer> count = FXCollections.observableArrayList(1,2,3,4,5);
-    ObservableList<String> difficulty = FXCollections.observableArrayList("Beginner","Medium","Hard","Expert","Insane");
-
-
-    public static boolean hasStormtrooper;
-    public static boolean hasDarthVader;
-    public static boolean hasKyloRen;
+    public static boolean hasStormtrooperA;
+    public static boolean hasStormtrooperB;
+    public static boolean hasStormtrooperC;
+    public static boolean hasStormtrooperD;
+    public static boolean hasStormtrooperE;
+    public static boolean hasDarthVaderA;
+    public static boolean hasDarthVaderB;
+    public static boolean hasDarthVaderC;
+    public static boolean hasDarthVaderD;
+    public static boolean hasDarthVaderE;
+    public static boolean hasKyloRenA;
+    public static boolean hasKyloRenB;
+    public static boolean hasKyloRenC;
+    public static boolean hasKyloRenD;
+    public static boolean hasKyloRenE;
 
     public static Parent root;
     public static Scene scene;
@@ -183,25 +188,6 @@ public class LoadingSceneController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources){
         EnemyCountBox.setItems(difficulty);
-
-    }
-
-    @FXML
-    public void AddStormtrooper(){
-        Controller.Enemies.add(new Stormtrooper());
-        hasStormtrooper = true;
-    }
-
-    @FXML
-    public void AddDarthVader(){
-        Controller.Enemies.add(new DarthVader());
-        hasDarthVader = true;
-    }
-
-    @FXML
-    public void AddKyloRen(){
-        Controller.Enemies.add(new KyloRen());
-        hasKyloRen = true;
     }
 
     @FXML
@@ -242,36 +228,6 @@ public class LoadingSceneController implements Initializable {
         stage.close();
     }
 
-    @FXML
-    void CloseDarthAttribute() {
-            DarthPane.setVisible(false);
-    }
-
-    @FXML
-    void CloseKyloAttribute() {
-            KyloPane.setVisible(false);
-    }
-
-    @FXML
-    void CloseStormtrooperAttribute() {
-            StormtrooperPane.setVisible(false);
-    }
-
-    @FXML
-    void OpenDarthAttribute() {
-        DarthPane.setVisible(true);
-    }
-
-    @FXML
-    void OpenKyloAttribute() {
-        KyloPane.setVisible(true);
-    }
-
-    @FXML
-    void OpenStormtrooperAttribute() {
-        StormtrooperPane.setVisible(true);
-    }
-
     void FadeAnimation(){
         FadeTransition fadeTransition = new FadeTransition();
         fadeTransition.setNode(ReadFileButton);
@@ -299,29 +255,31 @@ public class LoadingSceneController implements Initializable {
         translateTransition.setToY(-80); translateTransition1.setToY(-80); translateTransition2.setToY(-80);
         translateTransition.play(); translateTransition1.play(); translateTransition2.play();
     }
+
     @FXML
     void ReadFile() throws  IOException {
         FadeAnimation();
         AnimationTwo();
+        ContinueButton.setDisable(false);
         //Reading file section
         file = new File("Harita.txt");
         FileReader fileReader = new FileReader(file);
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         int enemyCount = 1;
         switch (EnemyCountBox.getValue()){
-            case "Easy":
+            case Easy:
                 enemyCount = 1;
                 break;
-            case "Medium":
+            case Medium:
                 enemyCount = 2;
                 break;
-            case "Hard":
+            case Hard:
                 enemyCount = 3;
                 break;
-            case "Expert" :
+            case Expert:
                 enemyCount = 4;
                 break;
-            case "Insane" :
+            case Insane :
                 enemyCount = 5;
                 break;
         }
@@ -340,80 +298,89 @@ public class LoadingSceneController implements Initializable {
         }
         for (int i = 0; i < Enemies.size(); i++) {
             if(Enemies.get(i).equals("DarthVader")){
-                AddDarthVader();
-                Controller.darthVader.setSpawnPoint(Gates.get(i));
-                switch (Controller.darthVader.getSpawnPoint()){
+                switch (Gates.get(i)){
                     case "A" :
                         DarthVaderA.setVisible(true);
+                        hasDarthVaderA = true;
                         EnemyNameA.setText("darth vader");
                         break;
                     case "B":
                         DarthVaderB.setVisible(true);
+                        hasDarthVaderB = true;
                         EnemyNameB.setText("darth vader");
                         break;
                     case  "C":
                         DarthVaderC.setVisible(true);
+                        hasDarthVaderC= true;
                         EnemyNameC.setText("darth vader");
                         break;
                     case "D":
                         DarthVaderD.setVisible(true);
+                        hasDarthVaderD = true;
                         EnemyNameD.setText("darth vader");
                         break;
                     case "E":
                         DarthVaderE.setVisible(true);
+                        hasDarthVaderE = true;
                         EnemyNameE.setText("darth vader");
                         break;
                 }
 
             }
             if (Enemies.get(i).equals("KyloRen")){
-                AddKyloRen();
-                Controller.kyloRen.setSpawnPoint(Gates.get(i));
-                switch (Controller.kyloRen.getSpawnPoint()){
+                switch (Gates.get(i)){
                     case "A" :
                         KyloRenA.setVisible(true);
+                        hasKyloRenA = true;
                         EnemyNameA.setText("kylo ren");
                         break;
                     case "B":
                         KyloRenB.setVisible(true);
+                        hasKyloRenB = true;
                         EnemyNameB.setText("kylo ren");
                         break;
                     case  "C":
                         KyloRenC.setVisible(true);
+                        hasKyloRenC = true;
                         EnemyNameC.setText("kylo ren");
                         break;
                     case "D":
                         KyloRenD.setVisible(true);
+                        hasKyloRenD = true;
                         EnemyNameD.setText("kylo ren");
                         break;
                     case "E":
                         KyloRenE.setVisible(true);
+                        hasKyloRenE = true;
                         EnemyNameE.setText("kylo ren");
                         break;
                 }
             }
             if (Enemies.get(i).equals("Stormtrooper")){
-                AddStormtrooper();
-                Controller.stormtrooper.setSpawnPoint(Gates.get(i));
-                switch (Controller.stormtrooper.getSpawnPoint()){
+                switch (Gates.get(i)){
                     case "A" :
                         StormtrooperA.setVisible(true);
+                        hasStormtrooperA = true;
                         EnemyNameA.setText("stormtrooper");
                         break;
                     case "B":
                         StormtrooperB.setVisible(true);
+                        hasStormtrooperB = true;
                         EnemyNameB.setText("stormtrooper");
                         break;
                     case  "C":
                         StormtrooperC.setVisible(true);
+                        hasStormtrooperC = true;
                         EnemyNameC.setText("stormtrooper");
                         break;
                     case "D":
                         StormtrooperD.setVisible(true);
+                        hasStormtrooperD= true;
                         EnemyNameD.setText("stormtrooper");
                         break;
                     case "E":
                         StormtrooperE.setVisible(true);
+                        hasStormtrooperE = true;
                         EnemyNameE.setText("stormtrooper");
                         break;
                 }

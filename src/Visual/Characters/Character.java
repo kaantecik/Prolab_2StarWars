@@ -1,8 +1,7 @@
 package Visual.Characters;
 
-import javafx.scene.shape.Rectangle;
 
-public class Character extends Rectangle {
+public class Character  {
 
     private String Name;
     private int[] PastLocX;
@@ -13,6 +12,17 @@ public class Character extends Rectangle {
     public enum Type{
         Good,
         Evil
+    }
+
+    private static String SpawnPoint;
+
+
+    public String getSpawnPoint() {
+        return SpawnPoint;
+    }
+
+    public void setSpawnPoint(String spawnPoint) {
+        SpawnPoint = spawnPoint;
     }
 
     public Type currentType;
