@@ -1,8 +1,8 @@
-Karakter:Stormtrooper,Kapi:A
+Karakter:Stormtrooper,Kapi:B
 Karakter:KyloRen,Kapi:E
 Karakter:DarthVader,Kapi:D
-Karakter:KyloRen,Kapi:B
-Karakter:DarthVader,Kapi:C
+Karakter:KyloRen,Kapi:C
+Karakter:DarthVader,Kapi:A
 0	0	0	0	1	0	0	0	0	0	0	0	1	0
 0	1	1	1	1	0	1	1	1	1	1	1	1	0
 0	1	0	1	1	1	1	0	1	0	0	0	1	0

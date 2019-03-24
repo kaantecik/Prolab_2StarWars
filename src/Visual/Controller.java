@@ -95,6 +95,19 @@ public class Controller  implements Initializable {
     @FXML
     private Pane WinPane;
 
+    public static int graph[][]=new int[][]{
+            {0,0,0,0,8,0,0,0,0,0,0,0,7,0},
+            {0,1,1,1,1,0,1,1,1,1,1,1,1,0},
+            {0,1,0,1,1,1,1,0,1,0,0,0,1,0},
+            {0,1,0,1,1,0,1,0,1,1,0,1,1,0},
+            {0,1,0,1,0,0,1,0,1,1,0,1,1,0},
+            {9,1,0,1,1,1,1,0,1,0,0,0,1,6},
+            {0,1,0,0,1,0,1,0,1,0,1,1,1,0},
+            {0,1,0,1,1,1,1,1,1,0,0,0,1,0},
+            {0,1,0,1,0,0,0,0,1,0,0,1,1,0},
+            {0,1,1,1,1,1,1,1,1,1,1,1,1,2},
+            {0,0,0,0,5,0,0,0,0,0,0,0,0,0},
+    };
 
     public static LukeSkywalker lukeSkywalker = new LukeSkywalker();
     public static MasterYoda masterYoda = new MasterYoda();
@@ -124,19 +137,6 @@ public class Controller  implements Initializable {
     /***********************************************************************************************************/
 
 
-    /**
-     * MOVEMENT
-     * <p>
-     * for (int p = 0; p < path.size(); p += 2) {
-     * int pathX = path.get(p);
-     * int pathY = path.get(p + 1);
-     * route.add(new Rectangle(39,39));
-     * route.get(p).setStyle("-fx-background-color: white");
-     * GridPane.setRowIndex(route.get(p),pathY);
-     * GridPane.setColumnIndex(route.get(p),pathX);
-     * <p>
-     * }
-     */
 
     public static ArrayList<Rectangle> route = new ArrayList<>();
 
@@ -145,11 +145,229 @@ public class Controller  implements Initializable {
         if (key.getCode() == KeyCode.DOWN || key.getCode() == KeyCode.S) {
             MoveCharacterDown();
 
-            deneme(stormtrooperA.getPosX(),stormtrooperA.getPosY(),pathX,pathY,masterYoda.getPosX(),masterYoda.getPosY());
-            //deneme(ShortestPath.graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,9);
-            for (int i = 0; i < pathY.size(); i++) {
-                System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+            //A-Yoda
+            if(LoadingSceneController.hasStormtrooperA && MenuController.isYoda) {
+                CalculatePathA(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,9);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
             }
+            if(LoadingSceneController.hasDarthVaderA && MenuController.isYoda) {
+                CalculatePathA(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,9);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasKyloRenA && MenuController.isYoda) {
+                CalculatePathA(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,9);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            //A-Luke
+            if(LoadingSceneController.hasStormtrooperA && !MenuController.isYoda) {
+                CalculatePathA(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,9);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderA && !MenuController.isYoda) {
+                CalculatePathA(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,9);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasKyloRenA && !MenuController.isYoda) {
+                CalculatePathA(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,9);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            //B-Yoda
+            if(LoadingSceneController.hasStormtrooperB && MenuController.isYoda) {
+                CalculatePathB(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,8);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderB && MenuController.isYoda) {
+                CalculatePathB(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,8);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasKyloRenB && MenuController.isYoda) {
+                CalculatePathB(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,8);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            //B-Luke
+            if(LoadingSceneController.hasStormtrooperB && !MenuController.isYoda) {
+                CalculatePathB(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,8);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderB && !MenuController.isYoda) {
+                CalculatePathB(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,8);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasKyloRenB && !MenuController.isYoda) {
+                CalculatePathB(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,8);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+
+            //C-Yoda
+            if(LoadingSceneController.hasStormtrooperC && MenuController.isYoda) {
+                CalculatePathC(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,7);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderC && MenuController.isYoda) {
+                CalculatePathC(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,7);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderC && MenuController.isYoda) {
+                CalculatePathC(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,7);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            //C-Luke
+            if(LoadingSceneController.hasStormtrooperC && !MenuController.isYoda) {
+                CalculatePathC(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,7);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderC && !MenuController.isYoda) {
+                CalculatePathC(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,7);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasKyloRenC && !MenuController.isYoda) {
+                CalculatePathC(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,7);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            //D-Yoda
+            if(LoadingSceneController.hasStormtrooperD && MenuController.isYoda) {
+                CalculatePathD(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,6);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderD && MenuController.isYoda) {
+                CalculatePathD(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,6);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderD && MenuController.isYoda) {
+                CalculatePathD(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,6);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            //D-Luke
+            if(LoadingSceneController.hasStormtrooperD && !MenuController.isYoda) {
+                CalculatePathD(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,6);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderD && !MenuController.isYoda) {
+                CalculatePathD(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,6);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasKyloRenD && !MenuController.isYoda) {
+                CalculatePathD(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,6);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            //E-Yoda
+            if(LoadingSceneController.hasStormtrooperE && MenuController.isYoda) {
+                CalculatePathE(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,5);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderE && MenuController.isYoda) {
+                CalculatePathE(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,5);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderE && MenuController.isYoda) {
+                CalculatePathE(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,5);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            //E-Luke
+            if(LoadingSceneController.hasStormtrooperE && !MenuController.isYoda) {
+                CalculatePathE(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,5);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderE && !MenuController.isYoda) {
+                CalculatePathE(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,5);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasKyloRenE && !MenuController.isYoda) {
+                CalculatePathE(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,5);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+
+
 
 
             //Win ekranı
@@ -158,8 +376,232 @@ public class Controller  implements Initializable {
             } else if (!MenuController.isYoda && GridPane.getRowIndex(CharacterLuke) == 9 && GridPane.getColumnIndex(CharacterLuke) == 13) {
                 WinPane.setVisible(true);
             }
-        } else if (key.getCode() == KeyCode.UP || key.getCode() == KeyCode.W) {
+        }
+        else if (key.getCode() == KeyCode.UP || key.getCode() == KeyCode.W) {
             MoveCharacterUp();
+            //A-Yoda
+            if(LoadingSceneController.hasStormtrooperA && MenuController.isYoda) {
+                CalculatePathA(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,9);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderA && MenuController.isYoda) {
+                CalculatePathA(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,9);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasKyloRenA && MenuController.isYoda) {
+                CalculatePathA(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,9);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            //A-Luke
+            if(LoadingSceneController.hasStormtrooperA && !MenuController.isYoda) {
+                CalculatePathA(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,9);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderA && !MenuController.isYoda) {
+                CalculatePathA(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,9);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasKyloRenA && !MenuController.isYoda) {
+                CalculatePathA(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,9);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            //B-Yoda
+            if(LoadingSceneController.hasStormtrooperB && MenuController.isYoda) {
+                CalculatePathB(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,8);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderB && MenuController.isYoda) {
+                CalculatePathB(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,8);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasKyloRenB && MenuController.isYoda) {
+                CalculatePathB(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,8);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            //B-Luke
+            if(LoadingSceneController.hasStormtrooperB && !MenuController.isYoda) {
+                CalculatePathB(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,8);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderB && !MenuController.isYoda) {
+                CalculatePathB(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,8);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasKyloRenB && !MenuController.isYoda) {
+                CalculatePathB(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,8);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+
+            //C-Yoda
+            if(LoadingSceneController.hasStormtrooperC && MenuController.isYoda) {
+                CalculatePathC(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,7);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderC && MenuController.isYoda) {
+                CalculatePathC(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,7);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderC && MenuController.isYoda) {
+                CalculatePathC(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,7);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            //C-Luke
+            if(LoadingSceneController.hasStormtrooperC && !MenuController.isYoda) {
+                CalculatePathC(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,7);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderC && !MenuController.isYoda) {
+                CalculatePathC(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,7);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasKyloRenC && !MenuController.isYoda) {
+                CalculatePathC(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,7);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            //D-Yoda
+            if(LoadingSceneController.hasStormtrooperD && MenuController.isYoda) {
+                CalculatePathD(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,6);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderD && MenuController.isYoda) {
+                CalculatePathD(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,6);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderD && MenuController.isYoda) {
+                CalculatePathD(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,6);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            //D-Luke
+            if(LoadingSceneController.hasStormtrooperD && !MenuController.isYoda) {
+                CalculatePathD(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,6);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderD && !MenuController.isYoda) {
+                CalculatePathD(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,6);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasKyloRenD && !MenuController.isYoda) {
+                CalculatePathD(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,6);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            //E-Yoda
+            if(LoadingSceneController.hasStormtrooperE && MenuController.isYoda) {
+                CalculatePathE(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,5);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderE && MenuController.isYoda) {
+                CalculatePathE(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,5);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderE && MenuController.isYoda) {
+                CalculatePathE(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,5);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            //E-Luke
+            if(LoadingSceneController.hasStormtrooperE && !MenuController.isYoda) {
+                CalculatePathE(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,5);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderE && !MenuController.isYoda) {
+                CalculatePathE(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,5);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasKyloRenE && !MenuController.isYoda) {
+                CalculatePathE(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,5);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+
+
 
             //Win ekranı
             if (MenuController.isYoda && GridPane.getRowIndex(CharacterYoda) == 9 && GridPane.getColumnIndex(CharacterYoda) == 13) {
@@ -170,6 +612,229 @@ public class Controller  implements Initializable {
         }
         else if (key.getCode() == KeyCode.LEFT || key.getCode() == KeyCode.A) {
             MoveCharacterLeft();
+//A-Yoda
+            if(LoadingSceneController.hasStormtrooperA && MenuController.isYoda) {
+                CalculatePathA(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,9);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderA && MenuController.isYoda) {
+                CalculatePathA(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,9);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasKyloRenA && MenuController.isYoda) {
+                CalculatePathA(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,9);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            //A-Luke
+            if(LoadingSceneController.hasStormtrooperA && !MenuController.isYoda) {
+                CalculatePathA(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,9);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderA && !MenuController.isYoda) {
+                CalculatePathA(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,9);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasKyloRenA && !MenuController.isYoda) {
+                CalculatePathA(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,9);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            //B-Yoda
+            if(LoadingSceneController.hasStormtrooperB && MenuController.isYoda) {
+                CalculatePathB(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,8);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderB && MenuController.isYoda) {
+                CalculatePathB(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,8);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasKyloRenB && MenuController.isYoda) {
+                CalculatePathB(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,8);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            //B-Luke
+            if(LoadingSceneController.hasStormtrooperB && !MenuController.isYoda) {
+                CalculatePathB(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,8);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderB && !MenuController.isYoda) {
+                CalculatePathB(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,8);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasKyloRenB && !MenuController.isYoda) {
+                CalculatePathB(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,8);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+
+            //C-Yoda
+            if(LoadingSceneController.hasStormtrooperC && MenuController.isYoda) {
+                CalculatePathC(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,7);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderC && MenuController.isYoda) {
+                CalculatePathC(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,7);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderC && MenuController.isYoda) {
+                CalculatePathC(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,7);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            //C-Luke
+            if(LoadingSceneController.hasStormtrooperC && !MenuController.isYoda) {
+                CalculatePathC(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,7);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderC && !MenuController.isYoda) {
+                CalculatePathC(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,7);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasKyloRenC && !MenuController.isYoda) {
+                CalculatePathC(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,7);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            //D-Yoda
+            if(LoadingSceneController.hasStormtrooperD && MenuController.isYoda) {
+                CalculatePathD(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,6);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderD && MenuController.isYoda) {
+                CalculatePathD(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,6);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderD && MenuController.isYoda) {
+                CalculatePathD(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,6);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            //D-Luke
+            if(LoadingSceneController.hasStormtrooperD && !MenuController.isYoda) {
+                CalculatePathD(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,6);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderD && !MenuController.isYoda) {
+                CalculatePathD(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,6);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasKyloRenD && !MenuController.isYoda) {
+                CalculatePathD(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,6);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            //E-Yoda
+            if(LoadingSceneController.hasStormtrooperE && MenuController.isYoda) {
+                CalculatePathE(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,5);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderE && MenuController.isYoda) {
+                CalculatePathE(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,5);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderE && MenuController.isYoda) {
+                CalculatePathE(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,5);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            //E-Luke
+            if(LoadingSceneController.hasStormtrooperE && !MenuController.isYoda) {
+                CalculatePathE(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,5);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderE && !MenuController.isYoda) {
+                CalculatePathE(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,5);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasKyloRenE && !MenuController.isYoda) {
+                CalculatePathE(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,5);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+
+
 
             //Win ekranı
             if (MenuController.isYoda && GridPane.getRowIndex(CharacterYoda) == 9 &&
@@ -182,6 +847,229 @@ public class Controller  implements Initializable {
         }
         else if (key.getCode() == KeyCode.RIGHT || key.getCode() == KeyCode.D) {
             MoveCharacterRight();
+//A-Yoda
+            if(LoadingSceneController.hasStormtrooperA && MenuController.isYoda) {
+                CalculatePathA(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,9);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderA && MenuController.isYoda) {
+                CalculatePathA(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,9);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasKyloRenA && MenuController.isYoda) {
+                CalculatePathA(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,9);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            //A-Luke
+            if(LoadingSceneController.hasStormtrooperA && !MenuController.isYoda) {
+                CalculatePathA(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,9);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderA && !MenuController.isYoda) {
+                CalculatePathA(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,9);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasKyloRenA && !MenuController.isYoda) {
+                CalculatePathA(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,9);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            //B-Yoda
+            if(LoadingSceneController.hasStormtrooperB && MenuController.isYoda) {
+                CalculatePathB(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,8);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderB && MenuController.isYoda) {
+                CalculatePathB(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,8);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasKyloRenB && MenuController.isYoda) {
+                CalculatePathB(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,8);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            //B-Luke
+            if(LoadingSceneController.hasStormtrooperB && !MenuController.isYoda) {
+                CalculatePathB(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,8);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderB && !MenuController.isYoda) {
+                CalculatePathB(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,8);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasKyloRenB && !MenuController.isYoda) {
+                CalculatePathB(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,8);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+
+            //C-Yoda
+            if(LoadingSceneController.hasStormtrooperC && MenuController.isYoda) {
+                CalculatePathC(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,7);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderC && MenuController.isYoda) {
+                CalculatePathC(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,7);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderC && MenuController.isYoda) {
+                CalculatePathC(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,7);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            //C-Luke
+            if(LoadingSceneController.hasStormtrooperC && !MenuController.isYoda) {
+                CalculatePathC(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,7);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderC && !MenuController.isYoda) {
+                CalculatePathC(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,7);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasKyloRenC && !MenuController.isYoda) {
+                CalculatePathC(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,7);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            //D-Yoda
+            if(LoadingSceneController.hasStormtrooperD && MenuController.isYoda) {
+                CalculatePathD(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,6);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderD && MenuController.isYoda) {
+                CalculatePathD(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,6);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderD && MenuController.isYoda) {
+                CalculatePathD(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,6);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            //D-Luke
+            if(LoadingSceneController.hasStormtrooperD && !MenuController.isYoda) {
+                CalculatePathD(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,6);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderD && !MenuController.isYoda) {
+                CalculatePathD(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,6);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasKyloRenD && !MenuController.isYoda) {
+                CalculatePathD(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,6);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            //E-Yoda
+            if(LoadingSceneController.hasStormtrooperE && MenuController.isYoda) {
+                CalculatePathE(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,5);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderE && MenuController.isYoda) {
+                CalculatePathE(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,5);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderE && MenuController.isYoda) {
+                CalculatePathE(graph,masterYoda.getPosX(),masterYoda.getPosY(),pathX,pathY,5);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            //E-Luke
+            if(LoadingSceneController.hasStormtrooperE && !MenuController.isYoda) {
+                CalculatePathE(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,5);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasDarthVaderE && !MenuController.isYoda) {
+                CalculatePathE(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,5);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+            if(LoadingSceneController.hasKyloRenE && !MenuController.isYoda) {
+                CalculatePathE(graph,lukeSkywalker.getPosX(),lukeSkywalker.getPosY(),pathX,pathY,5);
+                for (int i = 0; i < pathY.size(); i++) {
+                    System.out.print("(" + pathX.get(i) + "," + pathY.get(i) + ")");
+                }
+                System.out.println();
+            }
+
+
 
             //Win ekranı
             if (MenuController.isYoda && GridPane.getRowIndex(CharacterYoda) == 9 &&
@@ -467,54 +1355,7 @@ public class Controller  implements Initializable {
     }
 
 
-    //x düşmanın x konumu targetX karakterin konumu
-    public void deneme(int x, int y, List<Integer> pathX, List<Integer> pathY, int targetX, int targetY) {
-        if (x == targetX && y == targetY) {
-            pathX.add(x);
-            pathY.add(y);
-        }
-
-        int difX, difY;
-        difX = x - targetX;
-        difY = y - targetY;
-        //sağa duvar görene kadar gitti ve mesafeyi kontrol etti
-        if (difX <= 0 && !GameMap.getChildren().get(GridPane.getRowIndex(CharacterYoda) * 14 +
-                GridPane.getColumnIndex(CharacterYoda) + 1).getStyle().equals("-fx-fill: #738598;")) {
-            deneme(x + 1, y, pathX, pathY, targetX, targetY);
-            pathX.add(x);
-            pathY.add(y);
-
-        }
-        //sola duvar görene kadar gitti ve mesafeyi kontrol etti
-        if (difX >= 0 && !GameMap.getChildren().get(GridPane.getRowIndex(CharacterYoda) * 14 +
-                GridPane.getColumnIndex(CharacterYoda) - 1).getStyle().equals("-fx-fill: #738598;")) {
-            deneme(x - 1, y, pathX, pathY, targetX, targetY);
-            pathX.add(x);
-            pathY.add(y);
-
-        }
-
-        if (difY <= 0 && !GameMap.getChildren().get(((GridPane.getRowIndex(CharacterYoda) - 1) * 14 +
-                GridPane.getColumnIndex(CharacterYoda))).getStyle().equals("-fx-fill: #738598;")) {
-            deneme(x, y - 1, pathX, pathY, targetX, targetY);
-            pathX.add(x);
-            pathY.add(y);
-
-        }
-        if (difY >= 0 && !GameMap.getChildren().get(((GridPane.getRowIndex(CharacterYoda) +1) * 14 +
-                GridPane.getColumnIndex(CharacterYoda))).getStyle().equals("-fx-fill: #738598;")) {
-            deneme(x, y  + 1, pathX, pathY, targetX, targetY);
-            pathX.add(x);
-            pathY.add(y);
-
-        }
-
-
-    }
-
-
-
-      /*  public static boolean CalculatePathA(int[][] maze, int x, int y, List<Integer> pathX, List<Integer> pathY,int target) {
+        public static boolean CalculatePathA(int[][] maze, int x, int y, List<Integer> pathX, List<Integer> pathY,int target) {
 
             if (maze[y][x] == target) {
                 pathX.add(x);
@@ -553,7 +1394,7 @@ public class Controller  implements Initializable {
 
 
         }
-*/
+
 
     public static boolean CalculatePathB(int[][] maze, int x, int y, List<Integer> pathX, List<Integer> pathY,int target) {
 
